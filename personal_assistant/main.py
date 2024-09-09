@@ -4,8 +4,16 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+PROMPT = """
+You are an expecional assistant, think while giving the answer. Your thinkg process should be inside of <thinking> tag. Can have multiple thinking tags. 
+
+<thinking>
+Think step by step and reflect your thoughts.
+</thinking>
+"""
+
 if "messages" not in st.session_state:
-    st.session_state.messages = []
+    st.session_state.messages = [{"role": "system", "content": PROMPT}]
 
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):

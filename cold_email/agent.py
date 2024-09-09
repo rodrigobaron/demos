@@ -1,4 +1,6 @@
 from pydantic import BaseModel, Field, model_validator, FieldValidationInfo
+from pydantic import ValidationInfo, BaseModel, field_validator
+
 from prompt import JOBS_PROMPT, EMAIL_PROMPT
 from typing import List
 
@@ -10,55 +12,66 @@ class JobInfo(BaseModel):
     experience: str
     skills: List[str]
 
-    @model_validator(mode="after")
-    def validate_infos(self, info: FieldValidationInfo) -> "JobInfo":
-        if info.context is None:
-            print("No context found, skipping validation")
-            return self
-
-        context = info.context.get("text_chunk", None).lower()
-
+    @field_validator("role")
+    @classmethod
+    def role_exists(cls, v: str, info: ValidationInfo):
+        context = info.context
         if context:
-            # Validate Role
-            if self.role.lower() not in context:
-                raise ValueError(f"Role `{self.role}` not found in text")
-            # Validate Role
-            if self.experience.lower() not in context:
-                raise ValueError(f"Experience `{self.experience}` not found in text")
-            # Validate skills
-            for skill in self.skills:
+            context = context.get("text_chunk").lower()
+            if v.lower() not in context:
+                raise ValueError(f"Role `{v}` not found in text")
+        return v
+
+    @field_validator("experience")
+    @classmethod
+    def experience_exists(cls, v: str, info: ValidationInfo):
+        context = info.context
+        if context:
+            context = context.get("text_chunk").lower()
+            if v.lower() not in context:
+                raise ValueError(f"Experience `{v}` not found in text")
+        return v
+
+    @field_validator("skills")
+    @classmethod
+    def skills_exists(cls, v: List[str], info: ValidationInfo):
+        context = info.context
+        if context:
+            context = context.get("text_chunk").lower()
+            for skill in v:
                 if skill.lower() not in context:
                     raise ValueError(f"Skill `{skill}` not found in text")
-
-        return self
+        return v
 
 
 class PortifolioLink(BaseModel):
-    name: str
-    link: str
+    name: str = Field(..., description="Person name", required=True)
+    role: str = Field(..., description="Person role", required=True)
+    link: str = Field(..., description="Person portifolio link", required=True)
 
 
 class Email(BaseModel):
-    subject: str
-    content: str
-    portfolio_links: list[PortifolioLink]
+    subject: str = Field(..., description="Email subject", required=True)
+    content: str = Field(
+        ...,
+        description="Mail content without the ending regards, and links",
+        required=True,
+    )
+    portfolio_links: List[PortifolioLink]
+    best_regards: str
 
-    @model_validator(mode="after")
-    def validate_infos(self, info: FieldValidationInfo) -> "JobInfo":
-        if info.context is None:
-            print("No context found, skipping validation")
-            return self
-
-        context_links = info.context.get("links", None)
-
-        if context_links:
-            # Validate links
-            for link in self.portfolio_links:
+    @field_validator("portfolio_links")
+    @classmethod
+    def portfolio_links_exists(cls, v: List[PortifolioLink], info: ValidationInfo):
+        context = info.context
+        if context:
+            context_links = context.get("links")
+            for link in v:
                 if link.link not in context_links:
                     raise ValueError(
-                        f"Link `{link.link}` not found in the reference links"
+                        f"Link `{link.link}` not found in the reference links."
                     )
-        return self
+        return v
 
 
 def get_email(job_info, llm, user_info, link_list):
