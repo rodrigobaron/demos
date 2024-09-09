@@ -14,7 +14,7 @@ load_dotenv()
 logfire.configure(pydantic_plugin=logfire.PydanticPlugin(record="all"))
 litellm.success_callback = ["logfire"]
 
-model = os.getenv("API_MODEL")
+model = os.getenv("CURRENT_MODEL")
 embedding_model = os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
 llm_generator = LLM(model=model)
 vector_store = VectorStore("vect_db", "portfolio", embedding_model)
