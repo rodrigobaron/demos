@@ -1,6 +1,6 @@
 # 📧 Cold Mail Generator
 
-<img src="img/screenshot.png" />
+<img src="img/usage.png" />
 
 The tool generate cold email from a job description. First extract the job information and key points such required experience and skills, then use you company and you name to write an cold email from the job description.
 
