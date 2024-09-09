@@ -1,4 +1,4 @@
-from litellm import completion
+import litellm
 import instructor
 from instructor.client import T
 
@@ -8,10 +8,10 @@ class LLM:
         self.model = model
         if "groq" in model or "ollama_chat" in model:
             self.client = instructor.from_litellm(
-                completion, mode=instructor.Mode.MD_JSON
+                litellm.completion, mode=instructor.Mode.MD_JSON
             )
         else:
-            self.client = instructor.from_litellm(completion)
+            self.client = instructor.from_litellm(litellm.completion)
 
     def structured_complete(self, prompt: str, response_model: type[T], **kwargs) -> T:
         return self.client.chat.completions.create(

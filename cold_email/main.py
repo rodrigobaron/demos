@@ -6,8 +6,13 @@ from scrapper import AppleJobScrapper
 from llm import LLM
 from agent import get_job, get_email, Email
 from store import VectorStore
+import logfire
+import litellm
 
 load_dotenv()
+
+logfire.configure(pydantic_plugin=logfire.PydanticPlugin(record="all"))
+litellm.success_callback = ["logfire"]
 
 model = os.getenv("API_MODEL")
 embedding_model = os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")

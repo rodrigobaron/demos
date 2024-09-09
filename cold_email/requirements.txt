@@ -6,3 +6,4 @@ pydantic==2.9.0
 instructor==1.4.1
 chromadb==0.5.5
 sentence_transformers==3.0.1
+logfire===0.52.0
