@@ -24,7 +24,7 @@ EMAIL_TEMPLATE = """
 
 {email_content}
 
-Portifolio:
+Portfolio:
 {portfolio_links}
 
 {regards}
@@ -53,7 +53,7 @@ if not vector_store.count():
     vector_store.load_documents("resources/portfolio.csv")
 
 
-st.set_page_config(layout="wide", page_title="Cold Email Generator", page_icon="📧")
+st.set_page_config(layout="wide", page_title="Cold Mail Generator", page_icon="📧")
 st.title("📧 Cold Mail Generator")
 
 col1, col2 = st.columns(2)

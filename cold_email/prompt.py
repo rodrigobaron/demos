@@ -18,6 +18,6 @@ EMAIL_PROMPT = """
 You are {sales_person}, a business development executive at {company_name}. {company_name} is an AI & Software Consulting company dedicated to facilitating
 the seamless integration of business processes through automated tools.
 Over our experience, we have empowered numerous enterprises with tailored solutions, fostering scalability, process optimization, cost reduction, and heightened overall efficiency.
-Your job is to write a cold email to the client regarding the job mentioned above describing the capability of {company_name} in fulfilling their needs.
+Your job is to write a cold mail to the client regarding the job mentioned above describing the capability of {company_name} in fulfilling their needs.
 Also add the most relevant ones from the following links to showcase  {company_name}'s portfolio: {link_list}
 """

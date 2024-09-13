@@ -2,7 +2,7 @@
 
 <img src="img/usage.png" />
 
-The tool generate cold email from a job description. First extract the job information and key points such required experience and skills, then use you company and you name to write an cold email from the job description.
+The tool generate cold mail from a job description. First extract the job information and key points such required experience and skills, then use you company and you name to write an cold mail from the job description.
 
 ## Run
 1. Copy `.env.example` to `.env` then set yout keys.
@@ -17,6 +17,11 @@ The tool generate cold email from a job description. First extract the job infor
     streamlit run main.py --server.address 0.0.0.0 --server.port 5000
 ```
 
+# Tests
+
+The `PYTHONPATH=. pytest tests`.
+
 ## References
 
-This is a project inspirated from the (codebasics repo)[https://github.com/codebasics/project-genai-cold-email-generator]
+* This is a project inspirated from the [codebasics repo](https://github.com/codebasics/project-genai-cold-email-generator)  
+

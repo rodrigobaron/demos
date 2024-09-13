@@ -44,10 +44,10 @@ class JobInfo(BaseModel):
         return v
 
 
-class PortifolioLink(BaseModel):
+class PortfolioLink(BaseModel):
     name: str = Field(..., description="Person name", required=True)
     role: str = Field(..., description="Person role", required=True)
-    link: str = Field(..., description="Person portifolio link", required=True)
+    link: str = Field(..., description="Person portfolio link", required=True)
 
 
 class Email(BaseModel):
@@ -57,12 +57,12 @@ class Email(BaseModel):
         description="Mail content without the ending regards, and links",
         required=True,
     )
-    portfolio_links: List[PortifolioLink]
+    portfolio_links: List[PortfolioLink]
     best_regards: str
 
     @field_validator("portfolio_links")
     @classmethod
-    def portfolio_links_exists(cls, v: List[PortifolioLink], info: ValidationInfo):
+    def portfolio_links_exists(cls, v: List[PortfolioLink], info: ValidationInfo):
         context = info.context
         if context:
             context_links = context.get("links")

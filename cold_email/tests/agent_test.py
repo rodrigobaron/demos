@@ -1,6 +1,6 @@
 import pytest
 from pydantic import ValidationError
-from agent import JobInfo, PortifolioLink, Email, get_email, get_job
+from agent import JobInfo, PortfolioLink, Email, get_email, get_job
 from unittest.mock import MagicMock
 
 
@@ -12,7 +12,7 @@ Skills:
 - SQL
 """
 
-email_content = """ Write an cold email using 
+email_content = """ Write an cold mail using 
 portfolio: [{"name": "Rodrigo", "role": "Web Developer", "link": "https://example.com/rodrigo-portfolio"}]
 """
 portfolio_links = ["https://example.com/rodrigo-portfolio"]
@@ -73,7 +73,7 @@ def test_job_info_invalid_skill():
 
 
 def test_portfolio_link_valid():
-    link_dict = PortifolioLink(
+    link_dict = PortfolioLink(
         name="Rodrigo",
         role="Web Developer",
         link="https://example.com/rodrigo-portfolio",
@@ -114,7 +114,7 @@ def test_email_valid():
 
 
 def test_email_invalid_link():
-    link_dict = PortifolioLink(
+    link_dict = PortfolioLink(
         name="Rodrigo",
         role="Web Developer",
         link="https://example.com/invalid-portfolio",
