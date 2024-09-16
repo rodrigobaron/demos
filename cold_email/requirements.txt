@@ -1,9 +1,8 @@
-# chromadb
 streamlit==1.38.0
 python-dotenv==1.0.0
-litellm=1.44.22
+litellm==1.44.22
 pydantic==2.9.0
 instructor==1.4.1
 chromadb==0.5.5
 sentence_transformers==3.0.1
-logfire===0.52.0
+logfire==0.52.0
