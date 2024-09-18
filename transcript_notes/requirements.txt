@@ -1,0 +1,6 @@
+streamlit==1.38.0
+python-dotenv==1.0.0
+litellm==1.44.22
+pydantic==2.9.0
+instructor==1.4.1
+youtube-transcript-api==0.6.2
