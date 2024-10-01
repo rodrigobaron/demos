@@ -1,0 +1,9 @@
+pgvector==0.3.4
+sentence-transformers==3.1.1
+psycopg==3.2.2
+streamlit==1.38.0
+python-dotenv==1.0.0
+litellm==1.44.22
+pydantic==2.9.0
+instructor==1.4.1
+llama-index-llms-litellm==0.2.1
